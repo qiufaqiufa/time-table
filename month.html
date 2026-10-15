@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>时间管理</title>
+  <link rel="stylesheet" href="month.css">
+</head>
+<body>
+
+  <!-- 顶部导航区 -->
+  <header class="header">
+    <div class="nav-row">
+      <button id="prevMonth" class="nav-btn">&lt;</button>
+      <h1 id="monthTitle" class="title"></h1>
+      <button id="nextMonth" class="nav-btn">&gt;</button>
+    </div>
+    <a id="weekLink" class="week-btn" href="week.html">查看周视图</a>
+  </header>
+
+  <!-- 星期标题行 -->
+  <div class="weekday-row">
+    <span>一</span><span>二</span><span>三</span>
+    <span>四</span><span>五</span><span>六</span><span>日</span>
+  </div>
+
+  <!-- 月历网格（由 JS 动态填充） -->
+  <div class="calendar" id="calendar"></div>
+
+  <script src="month.js"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+/* ===== 全局样式重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 顶部标题栏 ===== */
+.header {
+  background: #fff;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-link {
+  font-size: 14px;
+  color: #4A90D9;
+  text-decoration: none;
+  min-width: 60px;
+}
+
+.back-link:active {
+  opacity: 0.7;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+}
+
+.header-spacer {
+  min-width: 60px;
+}
+
+/* ===== 周导航栏 ===== */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.nav-bar button {
+  padding: 6px 16px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-bar button:active {
+  background: #f0f0f0;
+}
+
+#todayBtn {
+  background: #4A90D9;
+  color: #fff;
+  border-color: #4A90D9;
+}
+
+#todayBtn:active {
+  background: #357ABD;
+}
+
+/* ===== 课表主体容器 ===== */
+.grid-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* 星期标题行 */
+.day-header-row {
+  display: flex;
+  border-bottom: 2px solid #e0e0e0;
+  flex-shrink: 0;
+  background: #fafafa;
+}
+
+.corner-cell {
+  width: 40px;
+  flex-shrink: 0;
+}
+
+.day-headers {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.day-header-cell {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  border-left: 1px solid #e0e0e0;
+}
+
+.day-header-cell .day-name {
+  display: block;
+  color: #666;
+}
+
+.day-header-cell .day-date {
+  display: block;
+  font-size: 10px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.day-header-cell.today {
+  background: #E3F2FD;
+}
+
+.day-header-cell.today .day-name {
+  color: #4A90D9;
+}
+
+/* 可滚动内容区 */
+.grid-body {
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 左侧时间刻度 */
+.time-gutter {
+  width: 40px;
+  flex-shrink: 0;
+  position: relative;
+  background: #fafafa;
+}
+
+.time-label {
+  position: absolute;
+  right: 4px;
+  font-size: 10px;
+  color: #999;
+  transform: translateY(-50%);
+  line-height: 1;
+}
+
+/* 七天事件列容器 */
+.day-columns {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  position: relative;
+}
+
+/* 单日列 */
+.day-column {
+  position: relative;
+  border-left: 1px solid #e0e0e0;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 29px,
+      #f0f0f0 29px,
+      #f0f0f0 30px
+    );
+}
+
+/* 当前日期列高亮 */
+.day-column.today {
+  background-color: #F9FBFD;
+}
+
+/* ===== 事件块 ===== */
+.event-block {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 11px;
+  color: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s;
+  z-index: 10;
+}
+
+.event-block:active {
+  transform: scale(0.97);
+}
+
+.event-block .event-title {
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-block .event-time {
+  font-size: 9px;
+  opacity: 0.9;
+  margin-top: 1px;
+}
+
+/* ===== 弹窗 ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.modal label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+  margin-top: 12px;
+}
+
+.modal input[type="date"],
+.modal input[type="time"],
+.modal input[type="text"],
+.modal textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.modal textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.time-row {
+  display: flex;
+  gap: 12px;
+}
+
+.time-field {
+  flex: 1;
+}
+
+/* 颜色选择器 */
+.color-picker {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.color-option {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.color-option.selected {
+  border-color: #333;
+}
+
+/* 弹窗按钮组 */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.right-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-save {
+  background: #4A90D9;
+  color: #fff;
+}
+
+.btn-save:active {
+  background: #357ABD;
+}
+
+.btn-save-week {
+  background: #2ECC71;
+  color: #fff;
+}
+
+.btn-save-week:active {
+  background: #27AE60;
+}
+
+.btn-cancel {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.btn-cancel:active {
+  background: #e0e0e0;
+}
+
+.btn-delete {
+  background: #FF6B6B;
+  color: #fff;
+}
+
+.btn-delete:active {
+  background: #E55A5A;
+}
+
+/* 编辑模式下才显示删除按钮 */
+.modal:not(.edit-mode) .btn-delete {
+  display: none;
+}
+
+/* ===== 循环课程选项 ===== */
+.recurring-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4A90D9;
+}
+
+.recurring-options {
+  margin-top: 8px;
+  padding-left: 26px;
+}

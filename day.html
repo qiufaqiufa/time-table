@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>单日详情 - 时间管理</title>
+  <link rel="stylesheet" href="day.css">
+</head>
+<body>
+
+  <!-- 顶部导航 -->
+  <header class="header">
+    <a href="month.html" class="back-btn">←</a>
+    <button id="prevDay" class="nav-btn">&lt;</button>
+    <h1 id="dayTitle" class="title"></h1>
+    <button id="nextDay" class="nav-btn">&gt;</button>
+    <span class="header-spacer"></span>
+  </header>
+
+  <!-- 上半部分：24h 时间轴 -->
+  <section class="timeline-section">
+    <div class="section-title">时间轴</div>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <!-- 下半部分：今日待办 -->
+  <section class="todo-section">
+    <div class="section-title">今日待办</div>
+    <div class="todo-input-row">
+      <input type="text" id="todoInput" placeholder="输入待办内容…">
+      <button id="addTodoBtn">添加</button>
+    </div>
+    <div class="todo-list" id="todoList"></div>
+  </section>
+
+  <!-- 事件新增/编辑弹窗 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3 id="modalTitle">新增事件</h3>
+
+      <label>日期</label>
+      <input type="date" id="eventDate">
+
+      <div class="time-row">
+        <div class="time-field">
+          <label>开始</label>
+          <input type="time" id="eventStart">
+        </div>
+        <div class="time-field">
+          <label>结束</label>
+          <input type="time" id="eventEnd">
+        </div>
+      </div>
+
+      <label>标题</label>
+      <input type="text" id="eventTitleInput" placeholder="事件标题">
+
+      <label>备注</label>
+      <textarea id="eventNote" placeholder="日记/备注" rows="2"></textarea>
+
+      <label>颜色</label>
+      <div class="color-picker" id="colorPicker"></div>
+
+      <div class="modal-actions">
+        <button class="btn-delete" id="btnDelete">删除</button>
+        <div class="right-btns">
+          <button class="btn-cancel" id="btnCancel">取消</button>
+          <button class="btn-save" id="btnSave">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="day.js"></script>
+</body>
+</html>

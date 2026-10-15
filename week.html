@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>周视图 - 时间管理</title>
+  <link rel="stylesheet" href="week.css">
+</head>
+<body>
+
+  <!-- 顶部标题栏 -->
+  <header class="header">
+    <a href="month.html" class="back-link">月视图</a>
+    <h1 id="weekTitle">周视图</h1>
+    <span class="header-spacer"></span>
+  </header>
+
+  <!-- 周导航 -->
+  <nav class="nav-bar">
+    <button id="prevWeek">&lt;</button>
+    <button id="todayBtn">今天</button>
+    <button id="nextWeek">&gt;</button>
+  </nav>
+
+  <!-- 课表主体区域 -->
+  <div class="grid-wrapper">
+    <!-- 星期标题行 -->
+    <div class="day-header-row">
+      <div class="corner-cell"></div>
+      <div class="day-headers" id="dayHeaders"></div>
+    </div>
+
+    <!-- 可滚动内容区（时间刻度 + 七列网格） -->
+    <div class="grid-body" id="gridBody">
+      <!-- 左侧时间刻度 -->
+      <div class="time-gutter" id="timeGutter"></div>
+      <!-- 七天事件列 -->
+      <div class="day-columns" id="dayColumns"></div>
+    </div>
+  </div>
+
+  <!-- 新增/编辑事件弹窗 -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3 id="modalTitle">新增事件</h3>
+
+      <label>日期</label>
+      <input type="date" id="eventDate">
+
+      <div class="time-row">
+        <div class="time-field">
+          <label>开始</label>
+          <input type="time" id="eventStart">
+        </div>
+        <div class="time-field">
+          <label>结束</label>
+          <input type="time" id="eventEnd">
+        </div>
+      </div>
+
+      <label>标题</label>
+      <input type="text" id="eventTitleInput" placeholder="事件标题">
+
+      <label>备注</label>
+      <textarea id="eventNote" placeholder="日记/备注" rows="2"></textarea>
+
+      <label>颜色</label>
+      <div class="color-picker" id="colorPicker"></div>
+
+      <!-- 循环课程选项 -->
+      <div class="recurring-section">
+        <label class="checkbox-label">
+          <input type="checkbox" id="recurringCheck">
+          <span>每周循环至截止日期</span>
+        </label>
+        <div class="recurring-options" id="recurringOptions" style="display:none;">
+          <label>截止日期</label>
+          <input type="date" id="recurringEndDate">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-delete" id="btnDelete">删除</button>
+        <div class="right-btns">
+          <button class="btn-cancel" id="btnCancel">取消</button>
+          <button class="btn-save-week" id="btnSaveWeek" style="display:none;">保存本周</button>
+          <button class="btn-save" id="btnSave">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="week.js"></script>
+</body>
+</html>
