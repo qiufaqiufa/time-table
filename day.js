@@ -135,9 +135,7 @@ function renderTimeline() {
   const timeline = document.getElementById('timeline');
   timeline.innerHTML = '';
 
-  // 总高度 = 24小时
-  const totalHeight = 24 * HOUR_HEIGHT;
-  timeline.style.height = totalHeight + 'px';
+  // 由绝对定位子元素撑开滚动区域，不设置显式高度，确保 0~24 点完整可滚动
 
   // 绘制小时刻度线和标签
   for (let h = 0; h < 24; h++) {
@@ -222,6 +220,7 @@ function renderTimeline() {
     block.innerHTML = `
       <div class="event-title">${escapeHtml(evt.title || '（无标题）')}</div>
       <div class="event-time">${evt.start} - ${evt.end}</div>
+      ${evt.note ? `<div class="event-note">${escapeHtml(evt.note)}</div>` : ''}
     `;
 
     block.addEventListener('click', (e) => {
