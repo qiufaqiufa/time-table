@@ -96,7 +96,8 @@ body {
   grid-template-columns: repeat(7, 1fr);
   background: #e0e0e0;
   gap: 1px;
-  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 单日格子 */
@@ -157,4 +158,26 @@ body {
   height: 5px;
   border-radius: 50%;
   background: #E74C3C;
+}
+
+/* ===== 导出备份按钮 ===== */
+.export-btn {
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: #bbb;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 100;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.export-btn:active {
+  opacity: 1;
+  background: #f0f0f0;
 }
