@@ -307,6 +307,7 @@ function renderEvents() {
       block.innerHTML = `
         <div class="event-title">${escapeHtml(evt.title || '（无标题）')}</div>
         <div class="event-time">${evt.start} - ${evt.end}</div>
+        ${evt.note ? `<div class="event-note">${escapeHtml(evt.note)}</div>` : ''}
       `;
 
       // 点击事件块 → 打开编辑弹窗
