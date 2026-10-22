@@ -103,9 +103,9 @@ function renderTitle() {
     `${currentYear}年${currentMonth + 1}月`;
 }
 
-/** 更新周视图链接（带上当前月份的参数） */
+/** 更新周视图链接（跳转到今天所在的那一周） */
 function renderWeekLink() {
-  const today = new Date(currentYear, currentMonth, 1);
+  const today = new Date();
   const monday = getMonday(today);
   document.getElementById('weekLink').href =
     `week.html?date=${formatDate(monday)}`;
@@ -227,6 +227,26 @@ function goToday() {
 
 // ===== 初始化 =====
 
+/** 导出全部日程数据为 JSON 备份文件 */
+function exportData() {
+  const data = {
+    events: JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]'),
+    todos: JSON.parse(localStorage.getItem(TODOS_KEY) || '[]'),
+    recurring: JSON.parse(localStorage.getItem(RECURRING_KEY) || '[]'),
+    exportDate: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const dateStr = formatDate(new Date());
+  a.download = `time-diary-backup-${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 function init() {
   loadData();
   renderAll();
@@ -237,6 +257,9 @@ function init() {
 
   // 点击标题回到今天
   document.getElementById('monthTitle').addEventListener('click', goToday);
+
+  // 导出备份按钮
+  document.getElementById('exportBtn').addEventListener('click', exportData);
 }
 
 document.addEventListener('DOMContentLoaded', init);
